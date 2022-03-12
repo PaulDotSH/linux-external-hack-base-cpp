@@ -26,6 +26,7 @@ void readMemory(unsigned long address, T* ret) {
     read (fd_proc_mem, buf, sizeof(T));
     //ret=buf;
     *ret=*buf;
+    free(buf);
 }
 
 template <typename T>
@@ -38,6 +39,7 @@ void writeMemory(unsigned long address, T val) {
     if (write (fd_proc_mem, buf , size) == -1) {
         std::cout << "Error while writing typesize " << sizeof(T) << " at address " << address << "\n";
     }
+    free(buf);
 }
 
 std::string exec(const char* cmd) {
